@@ -24,7 +24,8 @@ class Television:
         """
         Method to mute or unmute tv
         """
-        self.__muted = not self.__muted
+        if self.__status:
+            self.__muted = not self.__muted
 
     def channel_up(self) -> None:
         """
@@ -69,4 +70,8 @@ class Television:
         Method to show the tv status, channel and volume
         :return: tv status, tv channel and tv volume
         """
-        return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}"
+        if self.__muted:
+            _vol = Television.MIN_VOLUME
+        else:
+            _vol = self.__volume
+        return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {_vol}"
